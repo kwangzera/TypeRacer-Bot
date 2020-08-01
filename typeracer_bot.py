@@ -13,7 +13,7 @@ from selenium import webdriver
 
 keyboard = Controller()
 
-driver = webdriver.Chrome("chromedriver.exe")
+driver = webdriver.Chrome("driver/chromedriver.exe")
 driver.get("https://play.typeracer.com/")  # Open in new window
 
 
