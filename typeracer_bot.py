@@ -1,11 +1,3 @@
-'''
-maybe try/except for error messages
-drivers not just for chrome
-features for practice mode and shared link
-put everything into proper functions
-2 more functions (separate text box selecting and typing
-'''
-
 import time
 from bs4 import BeautifulSoup
 from pynput.keyboard import Key, Controller
