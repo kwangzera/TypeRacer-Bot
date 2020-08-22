@@ -4,4 +4,4 @@ This TypeRacer Bot uses both selenium and keyboard input with BeautifulSoup to s
 # Todo
 - Add more error handling
 - Add drivers not just for chrome
-- A choice between using selenium and BeautifulSoup
+- Comments

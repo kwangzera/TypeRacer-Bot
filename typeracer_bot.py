@@ -5,7 +5,7 @@ from selenium import webdriver
 
 
 class TyperacerBot:
-    def __init__(self, link):
+    def __init__(self, link="https://play.typeracer.com"):
         self.driver = webdriver.Chrome("driver/chromedriver.exe")
         self.keyboard = Controller()
         self.link = link
@@ -15,6 +15,8 @@ class TyperacerBot:
         self.driver.get(self.link)
 
     def find_text(self):
+        self.text = ""
+
         src = self.driver.page_source
         soup = BeautifulSoup(src, "html.parser")
         txt = soup.findAll("span")
@@ -25,36 +27,34 @@ class TyperacerBot:
 
         print(f"\"{self.text}\"")
 
-    def type_text(self, delay):
+    def bs4_type_text(self, delay):
         for i in self.text:
             time.sleep(delay)
             self.keyboard.press(i)
             self.keyboard.release(i)
 
-        self.text = ""
+    def sel_type_text(self, delay):
+        elem = self.driver.find_element_by_xpath("//td/input[@type='text']")
+
+        for i in self.text:
+            time.sleep(delay)
+            elem.send_keys(i)
 
 
 def main():
-    custom = input("Custom link? Y/N: ")
-    
-    if custom.upper() == "Y":
-        link = input("Custom link: ")
-    else:
-        link = "https://play.typeracer.com"
-
-    bot = TyperacerBot(link)
+    bot = TyperacerBot()
     bot.start()
 
     while True:
         try:
             delay = float(input("Set your delay and press enter when the race starts: "))
         except ValueError:
-            print("Invalid input. Delay set to 0.1 seconds.")
+            print("Delay set to default (0.1 seconds).")
             delay = 0.1
 
         bot.find_text()
         time.sleep(1)
-        bot.type_text(delay)
+        bot.bs4_type_text(delay)
 
 
 main()
