@@ -9,3 +9,4 @@ All necessary libraries will be installed in a virtual environment.
 - Add more error handling
 - Add drivers not just for chrome
 - Comments
+- More intuitive and automatic interface
