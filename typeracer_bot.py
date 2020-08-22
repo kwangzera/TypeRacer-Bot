@@ -47,8 +47,9 @@ def main():
 
     while True:
         try:
-            delay = float(input("Press enter when the race starts.: "))
+            delay = float(input("Set your delay and press enter when the race starts: "))
         except ValueError:
+            print("Invalid input. Delay set to 0.1 seconds.")
             delay = 0.1
 
         bot.find_text()
