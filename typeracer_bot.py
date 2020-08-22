@@ -27,12 +27,18 @@ class TyperacerBot:
 
         print(f"\"{self.text}\"")
 
+    # Typing the text by simulating keypresses
+    # After setting delay when race starts, immediately click the inputbox
+    # Otherwise, the text will be typed wherever the caret is active
     def bs4_type_text(self, delay):
         for i in self.text:
             time.sleep(delay)
             self.keyboard.press(i)
             self.keyboard.release(i)
 
+    # Typing the text by sending keys to an element
+    # Letters of the text will be sent to the inputbox element
+    # This method does not require manually clicking the inputbox but it's more laggy than the latter.
     def sel_type_text(self, delay):
         elem = self.driver.find_element_by_xpath("//td/input[@type='text']")
 
@@ -42,6 +48,7 @@ class TyperacerBot:
 
 
 def main():
+    # Pass your invite link below. Otherwise will default to https://play.typeracer.com
     bot = TyperacerBot()
     bot.start()
 
