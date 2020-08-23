@@ -2,21 +2,27 @@ import time
 from bs4 import BeautifulSoup
 from pynput.keyboard import Controller
 from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
 
 class TyperacerBot:
-    def __init__(self, link="https://play.typeracer.com"):
+    def __init__(self, link):
         self.driver = webdriver.Chrome("driver/chromedriver.exe")
         self.keyboard = Controller()
         self.link = link
         self.text = ""
 
     def start(self):
+        # Open the link
         self.driver.get(self.link)
 
     def find_text(self):
+        # Resetting text
         self.text = ""
 
+        # Get the html of the current page
         src = self.driver.page_source
         soup = BeautifulSoup(src, "html.parser")
         txt = soup.findAll("span")
@@ -27,16 +33,16 @@ class TyperacerBot:
 
         print(f"\"{self.text}\"")
 
-    # Typing the text by simulating keypresses
     def bs4_type_text(self, delay):
         for i in self.text:
             time.sleep(delay)
             self.keyboard.press(i)
             self.keyboard.release(i)
 
-    # Typing the text by sending letters to the inputbox element
     def sel_type_text(self, delay):
-        elem = self.driver.find_element_by_xpath("//td/input[@type='text']")
+        # Click the input bot when it can be clicked
+        wait = WebDriverWait(self.driver, 15)
+        elem = wait.until(EC.element_to_be_clickable((By.CLASS_NAME, "txtInput")))
 
         for i in self.text:
             time.sleep(delay)
@@ -44,10 +50,10 @@ class TyperacerBot:
 
 
 def main():
-    # Pass your invite link below. Otherwise will default to https://play.typeracer.com
-    bot = TyperacerBot()
+    bot = TyperacerBot("https://play.typeracer.com")
     bot.start()
 
+    # Able to run for multiple races
     while True:
         try:
             delay = float(input("Set your delay and press enter when the race starts: "))
@@ -57,7 +63,7 @@ def main():
 
         bot.find_text()
         time.sleep(1)
-        bot.bs4_type_text(delay)
+        bot.sel_type_text(delay)
 
 
 main()
