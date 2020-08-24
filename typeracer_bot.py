@@ -41,6 +41,7 @@ class TyperacerBot:
 
     def sel_type_text(self, delay):
         # Click the input bot when it can be clicked
+        # Maximum timeout of 15 seconds
         wait = WebDriverWait(self.driver, 15)
         elem = wait.until(EC.element_to_be_clickable((By.CLASS_NAME, "txtInput")))
 
