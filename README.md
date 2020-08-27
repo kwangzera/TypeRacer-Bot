@@ -11,7 +11,8 @@ Text finding will be done by using the webdriver to get the HTML of the current 
 Beautifulsoup4 will then be used instead of selenium to retrieve the text since selenium can be slow sometimes.  
 
 ### Usage
-**This program is not fully automatic as it does require you to do some clicking around. Automation is only for typing purposes.**
+**This program is not fully automatic as it does require the user to navigate the site via mousecliks.  
+Automation is only for typing purposes.**
 
 ### Todo
 - Add drivers not just for chrome
