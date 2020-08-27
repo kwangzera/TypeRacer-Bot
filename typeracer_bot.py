@@ -1,7 +1,9 @@
 import time
 from bs4 import BeautifulSoup
 from pynput.keyboard import Controller
+
 from selenium import webdriver
+from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -22,32 +24,35 @@ class TyperacerBot:
         # Resetting text
         self.text = ""
 
-        # Get the html of the current page
+        # Get the HTML of the current page
         src = self.driver.page_source
         soup = BeautifulSoup(src, "html.parser")
-        txt = soup.findAll("span")
+        span = soup.findAll("span")
 
-        for i in txt:
+        for i in span:
             if "unselectable" in str(i):
                 self.text += i.text
 
-        print(f"\"{self.text}\"")
+        if self.text:
+            print("- valid text successfully found")
 
-    def bs4_type_text(self, delay):
+    def keypress_type(self, delay):
         for i in self.text:
             time.sleep(delay)
             self.keyboard.press(i)
             self.keyboard.release(i)
 
-    def sel_type_text(self, delay):
-        # Click the input bot when it can be clicked
-        # Maximum timeout of 15 seconds
-        wait = WebDriverWait(self.driver, 15)
-        elem = wait.until(EC.element_to_be_clickable((By.CLASS_NAME, "txtInput")))
-
-        for i in self.text:
-            time.sleep(delay)
-            elem.send_keys(i)
+    def keysend_type(self, delay):
+        try:
+            # Click the inputbox when it can be clicked
+            wait = WebDriverWait(self.driver, 15)
+            elem = wait.until(EC.element_to_be_clickable((By.CLASS_NAME, "txtInput")))
+        except TimeoutException:
+            print("! inputbox not found within 15s")
+        else:
+            for i in self.text:
+                time.sleep(delay)
+                elem.send_keys(i)
 
 
 def main():
@@ -59,12 +64,12 @@ def main():
         try:
             delay = float(input("Set your delay and press enter when the race starts: "))
         except ValueError:
-            print("Delay set to default (0.1 seconds).")
+            print("- default delay time set to 0.1s")
             delay = 0.1
 
         bot.find_text()
         time.sleep(1)
-        bot.sel_type_text(delay)
+        bot.keypress_type(delay)
 
 
 main()
