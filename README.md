@@ -14,6 +14,7 @@ There are several fields that can be modified:
 - `delay`: Default delay time if user does not specify a delay time at the beginning of each race
 
 If using `keypress_type()`, the delay can be entered before the race starts becuase the program will automatically send the text to the inputbox when it is detected.  
+
 If using `keysend_type()`, the delay must be entered as soon as the races starts, and the inputbox must be selected before the program starts to simulate keypresses.  
 
 ### Todo
