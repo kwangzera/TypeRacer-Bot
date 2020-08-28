@@ -1,5 +1,5 @@
 # TypeRacer-Bot
-Python program that allows the use of both sending keys and simulating key presses to cheat in TypeRacer.
+Python program that allows the use of both sending keys and simulating key presses to cheat in TypeRacer.  
 **Be aware that the effectiveness of the program will depend on latency.**  
 
 ### Setup
