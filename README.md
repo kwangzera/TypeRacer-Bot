@@ -6,14 +6,19 @@ Be aware that the effectiveness of the program will depend on latency.
 Once downloaded, double click `run.bat` to start the program.  
 All necessary libraries will be installed in a virtual environment.  
 
-### Usage
-There are several fields that can be modified:
-- `keysend_type()`: Enter the text in the inputbox by simulating key presses
-- `keypress_type()`: Enter the text in the inputbox by sending keys with selenium
+### Predefined
+These variables have a default value but can be changed
 - `link`: Default typeracer link which can be changed to an invite link
 - `delay`: Default delay time if user does not specify a delay time at the beginning of each race
 
-If using `keypress_type()`, the delay can be entered before the race starts becuase the program will automatically send the text to the inputbox when it is detected. This automatic method results in lower speeds with more lag.
+When a race is in session, only one of these methods will be in charge of typing
+- `keysend_type()`: Enter the text in the inputbox by simulating key presses
+- `keypress_type()`: Enter the text in the inputbox by sending keys with selenium
+
+### Racing
+Anytime a race starts, the user is asked to input a delay time for that race. If nothing or something invalid is inputted, than the delay time defaults to 0.1s characters per second.
+
+If using `keypress_type()`, the delay can be entered before the race starts because the program will automatically send the text to the inputbox when it is detected. This automatic method results in lower speeds with more lag.
 
 If using `keysend_type()`, the delay must be entered as soon as the races starts, and the inputbox must be manually selected before the program starts to simulate keypresses. This manual method results in higher speeds with less lag.
 
