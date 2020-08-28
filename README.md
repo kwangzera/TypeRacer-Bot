@@ -1,5 +1,5 @@
 # TypeRacer-Bot
-This TypeRacer Bot uses both selenium and keyboard input to simulate key presses.  
+Python program that allows the use of both sending keys and simulating key presses to cheat in typeracer  
 Be aware that the effectiveness of the program will depend on latency.  
 
 ### Setup
@@ -8,14 +8,13 @@ All necessary libraries will be installed in a virtual environment.
 
 ### Usage
 There are several fields that can be modified:
-- `keysend_type()`: 
-- `keypress_type()`:
-- `link`:
-- `delay`:
+- `keysend_type()`: Enter the text in the inputbox by simulating key presses
+- `keypress_type()`: Enter the text in the inputbox by sending keys with selenium
+- `link`: Default typeracer link. Can be changed to an invite link
+- `delay`: Default delay time if user does not specify a delay time at the beginning of each race
 
-### Misc
-Text finding will be done by using the webdriver to get the HTML of the current page.  
-Beautifulsoup4 will then be used instead of selenium to retrieve the text since selenium can be slow sometimes.  
+If using `keypress_type()`, the delay can be entered before the race starts becuase the program will automatically send the text to the inputbox when it is detected.  
+If using `keysend_type()`, the delay must be entered as soon as the races starts, and the inputbox must be selected before the program starts to simulate keypresses.  
 
 ### Todo
 - Add drivers for other web browsers
