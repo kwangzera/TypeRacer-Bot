@@ -56,7 +56,11 @@ class TyperacerBot:
 
 
 def main():
-    bot = TyperacerBot("https://play.typeracer.com")
+    # Default link and delay time
+    link = "https://play.typeracer.com"
+    delay = 0.1
+
+    bot = TyperacerBot(link)
     bot.start()
 
     # Able to run for multiple races
@@ -65,7 +69,6 @@ def main():
             delay = float(input("Set your delay and press enter when the race starts: "))
         except ValueError:
             print("- default delay time set to 0.1s")
-            delay = 0.1
 
         bot.find_text()
         time.sleep(1)
