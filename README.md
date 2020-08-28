@@ -7,10 +7,11 @@ Once downloaded, double click `run.bat` to start the program.
 All necessary libraries will be installed in a virtual environment.  
 
 ### Usage
-Typing the text into the inputbox can be done with `keypress_type()`, which simulates key presses or  `keysend_type()` which uses selenium.  
-Before pressing setting your delay speed and pressing enter, make sure a race is counting down. This requires some navigating around the page.  
-If using `keypress_type()`, ...  
-If using `keysend_type()`, ...  
+There are several fields that can be modified:
+- `keysend_type()`: 
+- `keypress_type()`:
+- `link`:
+- `delay`:
 
 ### Misc
 Text finding will be done by using the webdriver to get the HTML of the current page.  
