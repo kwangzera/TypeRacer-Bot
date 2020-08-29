@@ -3,7 +3,6 @@ Python program that allows the use of both sending keys and simulating key press
 Be aware that the effectiveness of the program will depend on latency.  
 
 ![race](https://github.com/Togohogo1/TypeRacer-Bot/blob/master/screenshots/race.png)  
-
 ![interactive](https://github.com/Togohogo1/TypeRacer-Bot/blob/master/screenshots/interactive.png)  
 
 ### Setup
