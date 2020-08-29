@@ -13,8 +13,9 @@ If using `keypress_type()`, the delay can be entered before the race starts beca
 
 If using `keysend_type()`, the delay must be entered as soon as the races starts, and the inputbox must be manually selected before the program starts to simulate keypresses. This manual method results in higher speeds with less lag.
 
-In addition, the `link` variable can be modified to open an invite link and `delay` can be modified to change the default delay time.
+In addition, the `link` and `delay` variables can be modified to open an invite link and change the default delay time.
 
 ### Todo
 - Add drivers for other web browsers
 - Perhaps make the bot more automatic
+- print out some stats
