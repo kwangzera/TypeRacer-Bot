@@ -21,4 +21,4 @@ In addition, the `link` and `delay` variables can be modified to open an invite 
 ### Todo
 - Add drivers for other web browsers
 - Perhaps make the bot more automatic
-- Add more settings display them
+- Add more settings and display them
