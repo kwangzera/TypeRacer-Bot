@@ -9,7 +9,7 @@ Be aware that the effectiveness of the program will depend on latency.
 Once downloaded, double click `run.bat` to start the program.  
 All necessary libraries will be installed in a virtual environment.  
 
-A webdriver is necessary for the program to run. If the one located in `TypeRacer-Bot/driver/` does not work then [downloads](https://chromedriver.chromium.org/downloads) are available here. Webdrivers are also available for other browsers, but those have not been implemented in this program.
+A webdriver is necessary for the program to run. If the one located in `TypeRacer-Bot/driver` does not work then [downloads](https://chromedriver.chromium.org/downloads) are available here. Webdrivers are also available for other browsers, but those have not been implemented in this program.
 
 ### Racing
 Anytime a race starts, the user is asked to input a delay time. If nothing or something invalid is inputted, then the delay time defaults to 0.1s per characters. During the race, one of the two methods of typing, `keysend_type()` and `keypress_type()` will be used.
