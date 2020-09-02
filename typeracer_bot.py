@@ -55,7 +55,7 @@ def get_driver(preferred=None, drivers=DRIVER_FUNCS):
     for name, func in drivers.items():
         with suppress(WebDriverException):
             return func()
-    raise LookupError("Driver not found: {preferred=!r}")
+    raise LookupError(f"Driver not found: {preferred=!r}")
 
 def main(link="https://play.typeracer.com", delay=0.1, driver=None):
     if not isinstance(driver, WebDriver):
