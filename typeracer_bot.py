@@ -1,4 +1,6 @@
 import time
+from contextlib import suppress
+
 from bs4 import BeautifulSoup
 from pynput.keyboard import Controller
 
@@ -46,9 +48,27 @@ def keysend_type(driver, text, delay):
             elem.send_keys(i)
 
 
-def main(link="https://play.typeracer.com", delay=0.1):
-    driver = webdriver.Chrome("driver/chromedriver.exe")
+DRIVER_FUNCS = dict(
+    chrome=lambda: webdriver.Chrome(executable_path="driver/chromedriver"),
+    firefox=lambda: webdriver.Firefox(executable_path="driver/geckodriver"),
+    safari=lambda: webdriver.Safari(executable_path="driver/safaridriver"),
+)
+
+def get_driver(preferred=None, drivers=DRIVER_FUNCS):
+    """Return first working driver in `drivers` dict."""
+    if preferred is not None:
+        with suppress(WebDriverException):
+            return drivers[preferred]()
+    for name, func in drivers.items():
+        with suppress(WebDriverException):
+            return func()
+    raise LookupError("Driver not found: {preferred=!r}")
+
+def main(link="https://play.typeracer.com", delay=0.1, driver=None):
+    if not isinstance(driver, webdriver.WebDriver):
+        driver = get_driver(preferred=driver)
     keyboard = Controller()
+
     # Open the link
     driver.get(link)
 
