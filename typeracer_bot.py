@@ -36,16 +36,12 @@ def press_text(keyboard, text, delay):
         keyboard.release(i)
 
 def send_text(driver, text, delay):
-    try:
-        # Click the inputbox when it can be clicked
-        wait = WebDriverWait(driver, 15)
-        elem = wait.until(EC.element_to_be_clickable((By.CLASS_NAME, "txtInput")))
-    except TimeoutException:
-        print("! inputbox not found within 15s")
-    else:
-        for i in text:
-            time.sleep(delay)
-            elem.send_keys(i)
+    # Click the inputbox when it can be clicked
+    wait = WebDriverWait(driver, 15)
+    elem = wait.until(EC.element_to_be_clickable((By.CLASS_NAME, "txtInput")))
+    for i in text:
+        time.sleep(delay)
+        elem.send_keys(i)
 
 
 DRIVER_FUNCS = dict(
