@@ -9,50 +9,41 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
 
-class TyperacerBot:
-    def __init__(self, link):
-        self.driver = webdriver.Chrome("driver/chromedriver.exe")
-        self.keyboard = Controller()
-        self.link = link
-        self.text = ""
+def find_text(driver):
+    # Resetting text
+    text = ""
 
-    def start(self):
-        # Open the link
-        self.driver.get(self.link)
+    # Get the HTML of the current page
+    src = driver.page_source
+    soup = BeautifulSoup(src, "html.parser")
+    span = soup.findAll("span")
 
-    def find_text(self):
-        # Resetting text
-        self.text = ""
+    for i in span:
+        if "unselectable" in str(i):
+            text += i.text
 
-        # Get the HTML of the current page
-        src = self.driver.page_source
-        soup = BeautifulSoup(src, "html.parser")
-        span = soup.findAll("span")
+    if text:
+        print("- valid text successfully found")
 
-        for i in span:
-            if "unselectable" in str(i):
-                self.text += i.text
+    return text
 
-        if self.text:
-            print("- valid text successfully found")
+def keypress_type(keyboard, text, delay):
+    for i in text:
+        time.sleep(delay)
+        keyboard.press(i)
+        keyboard.release(i)
 
-    def keypress_type(self, delay):
-        for i in self.text:
+def keysend_type(driver, text, delay):
+    try:
+        # Click the inputbox when it can be clicked
+        wait = WebDriverWait(driver, 15)
+        elem = wait.until(EC.element_to_be_clickable((By.CLASS_NAME, "txtInput")))
+    except TimeoutException:
+        print("! inputbox not found within 15s")
+    else:
+        for i in text:
             time.sleep(delay)
-            self.keyboard.press(i)
-            self.keyboard.release(i)
-
-    def keysend_type(self, delay):
-        try:
-            # Click the inputbox when it can be clicked
-            wait = WebDriverWait(self.driver, 15)
-            elem = wait.until(EC.element_to_be_clickable((By.CLASS_NAME, "txtInput")))
-        except TimeoutException:
-            print("! inputbox not found within 15s")
-        else:
-            for i in self.text:
-                time.sleep(delay)
-                elem.send_keys(i)
+            elem.send_keys(i)
 
 
 def main():
@@ -60,19 +51,20 @@ def main():
     link = "https://play.typeracer.com"
     delay = 0.1
 
-    bot = TyperacerBot(link)
-    bot.start()
+    driver = webdriver.Chrome("driver/chromedriver.exe")
+    # Open the link
+    driver.get(link)
 
     # Able to run for multiple races
     while True:
         try:
             delay = float(input("Set your delay and press enter when the race starts: "))
         except ValueError:
-            print("- default delay time set to 0.1s")
+            print(f"- using previous delay time of {delay}s")
 
-        bot.find_text()
+        text = find_text(driver)
         time.sleep(1)
-        bot.keypress_type(delay)
+        keypress_type(driver, text, delay)
 
 
 main()
