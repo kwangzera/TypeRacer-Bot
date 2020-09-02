@@ -29,13 +29,13 @@ def find_text(driver):
 
     return text
 
-def keypress_type(keyboard, text, delay):
+def press_text(keyboard, text, delay):
     for i in text:
         time.sleep(delay)
         keyboard.press(i)
         keyboard.release(i)
 
-def keysend_type(driver, text, delay):
+def send_text(driver, text, delay):
     try:
         # Click the inputbox when it can be clicked
         wait = WebDriverWait(driver, 15)
@@ -81,7 +81,7 @@ def main(link="https://play.typeracer.com", delay=0.1, driver=None):
 
         text = find_text(driver)
         time.sleep(1)
-        keypress_type(keyboard, text, delay)
+        press_text(keyboard, text, delay)
 
 
 main()
