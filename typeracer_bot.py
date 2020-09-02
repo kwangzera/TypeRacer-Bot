@@ -52,6 +52,7 @@ def main():
     delay = 0.1
 
     driver = webdriver.Chrome("driver/chromedriver.exe")
+    keyboard = Controller()
     # Open the link
     driver.get(link)
 
@@ -64,7 +65,7 @@ def main():
 
         text = find_text(driver)
         time.sleep(1)
-        keypress_type(driver, text, delay)
+        keypress_type(keyboard, text, delay)
 
 
 main()
