@@ -57,7 +57,7 @@ def get_driver(preferred=None, drivers=DRIVER_FUNCS):
             return func()
     raise LookupError(f"Driver not found: {preferred=!r}")
 
-def main(link="https://play.typeracer.com", delay=0.1, driver=None):
+def main(link="https://play.typeracer.com", default=0.1, driver=None):
     if not isinstance(driver, WebDriver):
         driver = get_driver(preferred=driver)
     keyboard = Controller()
@@ -70,7 +70,8 @@ def main(link="https://play.typeracer.com", delay=0.1, driver=None):
         try:
             delay = float(input("Set your delay and press enter when the race starts: "))
         except ValueError:
-            print(f"- using previous delay time of {delay}s")
+            print(f"- default delay time set to {default}s")
+            delay = default
 
         text = find_text(driver)
         time.sleep(1)
