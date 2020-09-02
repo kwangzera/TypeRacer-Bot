@@ -5,45 +5,41 @@ from bs4 import BeautifulSoup
 from pynput.keyboard import Controller
 
 from selenium import webdriver
-from selenium.common.exceptions import TimeoutException, WebDriverException
+from selenium.common.exceptions import WebDriverException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
 
 def find_text(driver):
-    # Resetting text
-    text = ""
-
+    """Return typeracer text."""
     # Get the HTML of the current page
     src = driver.page_source
     soup = BeautifulSoup(src, "html.parser")
     span = soup.findAll("span")
 
+    text = ""
     for i in span:
         if "unselectable" in str(i):
             text += i.text
-
-    if text:
-        print("- valid text successfully found")
-
     return text
 
 def press_text(keyboard, text, delay):
+    """Type `text` using `keyboard` to simulate real keypresses."""
     for i in text:
         time.sleep(delay)
         keyboard.press(i)
         keyboard.release(i)
 
 def send_text(driver, text, delay):
+    """Send `text` to text input box first working driver in `drivers` dict."""
     # Click the inputbox when it can be clicked
-    wait = WebDriverWait(driver, 15)
-    elem = wait.until(EC.element_to_be_clickable((By.CLASS_NAME, "txtInput")))
+    elem = WebDriverWait(driver, 15).until(EC.element_to_be_clickable((By.CLASS_NAME, "txtInput")))
     for i in text:
         time.sleep(delay)
         elem.send_keys(i)
 
-
+# dict[name: lambda -> WebDriver]
 DRIVER_FUNCS = dict(
     chrome=lambda: webdriver.Chrome(executable_path="driver/chromedriver"),
     firefox=lambda: webdriver.Firefox(executable_path="driver/geckodriver"),
@@ -80,4 +76,5 @@ def main(link="https://play.typeracer.com", delay=0.1, driver=None):
         press_text(keyboard, text, delay)
 
 
-main()
+if __name__ == "__main__":
+    main()
