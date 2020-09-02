@@ -4,7 +4,8 @@ from contextlib import suppress
 from bs4 import BeautifulSoup
 from pynput.keyboard import Controller
 
-from selenium import webdriver
+from selenium.webdriver import Chrome, Firefox, Safari
+from selenium.webdriver.remote.webdriver import WebDriver
 from selenium.common.exceptions import WebDriverException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
@@ -41,9 +42,9 @@ def send_text(driver, text, delay):
 
 # dict[name: lambda -> WebDriver]
 DRIVER_FUNCS = dict(
-    chrome=lambda: webdriver.Chrome(executable_path="driver/chromedriver"),
-    firefox=lambda: webdriver.Firefox(executable_path="driver/geckodriver"),
-    safari=lambda: webdriver.Safari(executable_path="driver/safaridriver"),
+    chrome=lambda: Chrome(executable_path="driver/chromedriver"),
+    firefox=lambda: Firefox(executable_path="driver/geckodriver"),
+    safari=lambda: Safari(executable_path="driver/safaridriver"),
 )
 
 def get_driver(preferred=None, drivers=DRIVER_FUNCS):
@@ -57,7 +58,7 @@ def get_driver(preferred=None, drivers=DRIVER_FUNCS):
     raise LookupError("Driver not found: {preferred=!r}")
 
 def main(link="https://play.typeracer.com", delay=0.1, driver=None):
-    if not isinstance(driver, webdriver.WebDriver):
+    if not isinstance(driver, WebDriver):
         driver = get_driver(preferred=driver)
     keyboard = Controller()
 
