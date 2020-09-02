@@ -46,11 +46,7 @@ def keysend_type(driver, text, delay):
             elem.send_keys(i)
 
 
-def main():
-    # Default link and delay time
-    link = "https://play.typeracer.com"
-    delay = 0.1
-
+def main(link="https://play.typeracer.com", delay=0.1):
     driver = webdriver.Chrome("driver/chromedriver.exe")
     keyboard = Controller()
     # Open the link
