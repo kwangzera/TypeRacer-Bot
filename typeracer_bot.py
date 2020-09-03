@@ -48,8 +48,10 @@ def send_text(driver, text, delay):
         elem.send_keys(i)
 
 DriverInfo = namedtuple("DriverInfo", "name driver")
-def get_driver(preferred=None, drivers=DRIVER_FUNCS):
+def get_driver(preferred=None, drivers=None):
     """Return first working driver name and instance in `drivers` dict."""
+    if drivers is None:
+        drivers = DRIVER_FUNCS
     if preferred in drivers:  # Hopefully None isn't a key in drivers
         with suppress(WebDriverException):
             return DriverInfo(preferred, drivers[preferred]())
