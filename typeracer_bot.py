@@ -5,7 +5,7 @@ from collections import namedtuple
 from bs4 import BeautifulSoup
 from pynput.keyboard import Controller
 
-from selenium.webdriver import Chrome, Firefox
+from selenium.webdriver import Chrome, Firefox, Edge
 from selenium.webdriver.remote.webdriver import WebDriver
 from selenium.common.exceptions import WebDriverException
 from selenium.webdriver.common.by import By
@@ -16,6 +16,7 @@ from selenium.webdriver.support import expected_conditions as EC
 DRIVER_FUNCS = dict(
     chrome=lambda: Chrome(executable_path="driver/chromedriver"),
     firefox=lambda: Firefox(executable_path="driver/geckodriver"),
+    edge=lambda: Edge(executable_path="driver/MicrosoftWebDriver"),
 )
 
 def find_text(driver):
