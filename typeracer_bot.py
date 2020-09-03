@@ -11,6 +11,12 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
+# dict[name: lambda -> WebDriver]
+DRIVER_FUNCS = dict(
+    chrome=lambda: Chrome(executable_path="driver/chromedriver"),
+    firefox=lambda: Firefox(executable_path="driver/geckodriver"),
+    safari=lambda: Safari(executable_path="driver/safaridriver"),
+)
 
 def find_text(driver):
     """Return typeracer text."""
@@ -39,13 +45,6 @@ def send_text(driver, text, delay):
     for i in text:
         time.sleep(delay)
         elem.send_keys(i)
-
-# dict[name: lambda -> WebDriver]
-DRIVER_FUNCS = dict(
-    chrome=lambda: Chrome(executable_path="driver/chromedriver"),
-    firefox=lambda: Firefox(executable_path="driver/geckodriver"),
-    safari=lambda: Safari(executable_path="driver/safaridriver"),
-)
 
 def get_driver(preferred=None, drivers=DRIVER_FUNCS):
     """Return first working driver in `drivers` dict."""
