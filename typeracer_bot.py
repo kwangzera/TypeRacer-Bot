@@ -1,6 +1,5 @@
 import time
 from contextlib import suppress
-from collections import namedtuple
 
 from bs4 import BeautifulSoup
 from pynput.keyboard import Controller
@@ -47,22 +46,21 @@ def send_text(driver, text, delay):
         time.sleep(delay)
         elem.send_keys(i)
 
-DriverInfo = namedtuple("DriverInfo", "name driver")
 def get_driver(preferred=None, drivers=None):
-    """Return first working driver name and instance in `drivers` dict."""
+    """Return first working driver instance in `drivers` dict."""
     if drivers is None:
         drivers = DRIVER_FUNCS
     if preferred in drivers:  # Hopefully None isn't a key in drivers
         with suppress(WebDriverException):
-            return DriverInfo(preferred, drivers[preferred]())
+            return drivers[preferred]()
     for name, func in drivers.items():
         with suppress(WebDriverException):
-            return DriverInfo(name, func())
+            return func()
     raise LookupError(f"Driver not found: {preferred=!r}")
 
 def main(link="https://play.typeracer.com", default=0.1, driver=None):
     if not isinstance(driver, WebDriver):
-        driver = get_driver(preferred=driver).driver
+        driver = get_driver(preferred=driver)
     keyboard = Controller()
 
     # Open the link
