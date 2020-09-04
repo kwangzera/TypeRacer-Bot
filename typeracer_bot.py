@@ -4,12 +4,12 @@ from contextlib import suppress
 from bs4 import BeautifulSoup
 from pynput.keyboard import Controller
 
-from selenium.webdriver import Chrome, Firefox, Edge
-from selenium.webdriver.remote.webdriver import WebDriver
 from selenium.common.exceptions import WebDriverException
+from selenium.webdriver import Chrome, Firefox, Edge
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.remote.webdriver import WebDriver
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.ui import WebDriverWait
 
 # dict[name: lambda -> WebDriver]
 DRIVER_FUNCS = dict(
