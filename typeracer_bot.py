@@ -11,12 +11,12 @@ from selenium.webdriver.remote.webdriver import WebDriver
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 
-# dict[name: lambda -> WebDriver]
-DRIVER_FUNCS = dict(
-    chrome=lambda: Chrome(executable_path="drivers/chromedriver"),
-    firefox=lambda: Firefox(executable_path="drivers/firefoxdriver"),
-    edge=lambda: Edge(executable_path="drivers/edgedriver"),
-)
+# dict[name: WebDriver]
+DRIVER_CLASSES = {
+    "chrome": Chrome,
+    "firefox": Firefox,
+    "edge": Edge,
+}
 
 
 def find_text(driver):
@@ -67,15 +67,17 @@ def get_driver(preferred=None, drivers=None):
     """Return first working driver instance in `drivers` dict."""
 
     if drivers is None:
-        drivers = DRIVER_FUNCS
+        drivers = DRIVER_CLASSES
 
     if preferred in drivers:  # Hopefully None isn't a key in drivers
         with suppress(WebDriverException):
-            return drivers[preferred]()
+            return drivers[preferred](executable_path=f"drivers/{preferred}driver")
 
-    for func in drivers.values():
+    for name, cls in drivers.items():
         with suppress(WebDriverException):
-            return func()
+            return cls(executable_path=f"drivers/{name}driver")
+
+    raise LookupError(f"Driver not found: {preferred=}")
 
 
 def main(link="https://play.typeracer.com", default=0.1, driver=None):
