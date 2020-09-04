@@ -20,47 +20,61 @@ DRIVER_FUNCS = dict(
 
 def find_text(driver):
     """Return typeracer text."""
+
     # Get the HTML of the current page
     src = driver.page_source
     soup = BeautifulSoup(src, "html.parser")
     span = soup.findAll("span")
 
     text = ""
+
     for i in span:
         if "unselectable" in str(i):
             text += i.text
+
     return text
+
 
 def press_text(keyboard, text, delay):
     """Type `text` using `keyboard` to simulate real keypresses."""
+
     for i in text:
         time.sleep(delay)
         keyboard.press(i)
         keyboard.release(i)
 
+
 def send_text(driver, text, delay):
     """Send `text` to text input box first working driver in `drivers` dict."""
+
     # Click the inputbox when it can be clicked
     elem = WebDriverWait(driver, 15).until(EC.element_to_be_clickable((By.CLASS_NAME, "txtInput")))
+
     for i in text:
         time.sleep(delay)
         elem.send_keys(i)
 
 def get_driver(preferred=None, drivers=None):
     """Return first working driver instance in `drivers` dict."""
+
     if drivers is None:
         drivers = DRIVER_FUNCS
+
     if preferred in drivers:  # Hopefully None isn't a key in drivers
         with suppress(WebDriverException):
             return drivers[preferred]()
+
     for func in drivers.values():
         with suppress(WebDriverException):
             return func()
+
     raise LookupError(f"Driver not found: {preferred=!r}")
+
 
 def main(link="https://play.typeracer.com", default=0.1, driver=None):
     if not isinstance(driver, WebDriver):
         driver = get_driver(preferred=driver)
+
     keyboard = Controller()
 
     # Open the link
