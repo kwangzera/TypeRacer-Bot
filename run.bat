@@ -7,4 +7,4 @@ echo installing requirements
 python -m pip install -r requirements.txt
 
 echo starting app
-start python typeracer_bot.py
+python typeracer_bot.py
