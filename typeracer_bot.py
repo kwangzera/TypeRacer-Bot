@@ -14,8 +14,8 @@ from selenium.webdriver.support import expected_conditions as EC
 # dict[name: lambda -> WebDriver]
 DRIVER_FUNCS = dict(
     chrome=lambda: Chrome(executable_path="driver/chromedriver"),
-    firefox=lambda: Firefox(executable_path="driver/geckodriver"),
-    edge=lambda: Edge(executable_path="driver/MicrosoftWebDriver"),
+    firefox=lambda: Firefox(executable_path="driver/firefoxdriver"),
+    edge=lambda: Edge(executable_path="driver/edgedriver"),
 )
 
 def find_text(driver):
@@ -53,7 +53,7 @@ def get_driver(preferred=None, drivers=None):
     if preferred in drivers:  # Hopefully None isn't a key in drivers
         with suppress(WebDriverException):
             return drivers[preferred]()
-    for name, func in drivers.items():
+    for func in drivers.values():
         with suppress(WebDriverException):
             return func()
     raise LookupError(f"Driver not found: {preferred=!r}")
