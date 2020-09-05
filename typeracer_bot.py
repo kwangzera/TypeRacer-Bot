@@ -7,26 +7,19 @@ from pynput.keyboard import Controller
 from selenium.common.exceptions import TimeoutException, WebDriverException
 from selenium.webdriver import Chrome, Firefox, Edge
 from selenium.webdriver.common.by import By
-from selenium.webdriver.remote.webdriver import WebDriver
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 
-# dict[name: WebDriver]
-DRIVER_CLASSES = {
-    "chrome": Chrome,
-    "firefox": Firefox,
-    "edge": Edge,
-}
-
 
 def find_text(driver):
-    """Return typeracer text."""
+    """Returns typeracer text"""
 
     # Get the HTML of the current page
     src = driver.page_source
     soup = BeautifulSoup(src, "html.parser")
     span = soup.findAll("span")
 
+    # Text to be typed
     text = ""
 
     for i in span:
@@ -40,7 +33,7 @@ def find_text(driver):
 
 
 def press_text(keyboard, text, delay):
-    """Type `text` using `keyboard` to simulate real keypresses."""
+    """Type `text` using `keyboard` to simulate real keypresses"""
 
     for i in text:
         time.sleep(delay)
@@ -49,7 +42,7 @@ def press_text(keyboard, text, delay):
 
 
 def send_text(driver, text, delay):
-    """Send `text` to text input box first working driver in `drivers` dict."""
+    """Send `text` to text input box first working driver in `drivers` dict"""
 
     try:
         # Click the inputbox when it can be clicked
@@ -63,27 +56,25 @@ def send_text(driver, text, delay):
             elem.send_keys(i)
 
 
-def get_driver(preferred=None, drivers=None):
-    """Return first working driver instance in `drivers` dict."""
+def get_driver(pref):
+    """If pref in `drivers` dict, return respective driver"""
 
-    if drivers is None:
-        drivers = DRIVER_CLASSES
+    # dict[name: lambda -> WebDriver]
+    drivers = dict(
+        chrome=lambda: Chrome(executable_path="drivers/chromedriver"),
+        firefox=lambda: Firefox(executable_path="drivers/firefoxdriver"),
+        edge=lambda: Edge(executable_path="drivers/edgedriver"),
+    )
 
-    if preferred in drivers:  # Hopefully None isn't a key in drivers
+    if pref in drivers:
         with suppress(WebDriverException):
-            return drivers[preferred](executable_path=f"drivers/{preferred}driver")
+            return drivers[pref]()
 
-    for name, cls in drivers.items():
-        with suppress(WebDriverException):
-            return cls(executable_path=f"drivers/{name}driver")
-
-    raise LookupError(f"Driver not found: {preferred=}")
+    raise LookupError(f"Driver and/or browser for driver '{pref}' does not exist")
 
 
-def main(link="https://play.typeracer.com", default=0.1, driver=None):
-    if not isinstance(driver, WebDriver):
-        driver = get_driver(preferred=driver)
-
+def main(link="https://play.typeracer.com", default=0.1, driver="chrome"):
+    driver = get_driver(driver)
     keyboard = Controller()
 
     # Open the link
@@ -103,4 +94,4 @@ def main(link="https://play.typeracer.com", default=0.1, driver=None):
 
 
 if __name__ == "__main__":
-    main()
+    main(driver="firefox")
