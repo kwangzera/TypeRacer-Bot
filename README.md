@@ -12,11 +12,11 @@ To start the program, double click `run.bat` once downloaded. All necessary libr
 ### Racing
 Anytime a race starts, the user is asked to input a delay time. If nothing or something invalid is inputted, then the delay time defaults to 0.1s per characters. During the race, one of the two methods of typing, `keysend_type()` and `keypress_type()` will be used.
 
+If using `keysend_type()`, the delay must be entered as soon as the races starts, and the inputbox must be manually selected before the program starts to simulate keypresses. This manual method results in higher speeds with less lag. This method is the one currently used in `typeracer_bot.py`.
+
 If using `keypress_type()`, the delay can be entered before the race starts because the program will automatically send the text to the inputbox when it is detected. This automatic method results in lower speeds with more lag.
 
-If using `keysend_type()`, the delay must be entered as soon as the races starts, and the inputbox must be manually selected before the program starts to simulate keypresses. This manual method results in higher speeds with less lag.
-
-In addition, the `link` and `delay` variables can be modified to open an invite link and change the default delay time.
+In addition, `link`, `delay`, and `driver` parameters can be modified to open an invite link, change the default delay time, and change the driver.
 
 ### Todo
 - Perhaps make the bot more automatic
