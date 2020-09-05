@@ -5,7 +5,7 @@ Python program that allows the use of both sending keys and simulating key press
 ![interactive](https://github.com/Togohogo1/TypeRacer-Bot/blob/master/screenshots/interactive.png)  
 
 ### Setup
-A webdriver is necessary for the program to run. If the one located in `TypeRacer-Bot/driver` does not work then [downloads](https://chromedriver.chromium.org/downloads) are available here. Webdrivers are also available for other browsers, but those have not been implemented in this program.
+A webdriver is necessary for the program to run. If the ones located in `TypeRacer-Bot/drivers` do not work it probably means that either the browser version is not compatible with the webdriver version and/or the browser for the webdriver isn't installed. Driver downloads are available for [Chrome](https://chromedriver.chromium.org/downloads), [Firefox](https://github.com/mozilla/geckodriver/releases), [Edge](https://developer.microsoft.com/en-us/microsoft-edge/tools/webdriver/), and more.
 
 To start the program, double click `run.bat` once downloaded. All necessary libraries will be installed in a virtual environment.
 
@@ -21,4 +21,3 @@ In addition, the `link` and `delay` variables can be modified to open an invite 
 ### Todo
 - Perhaps make the bot more automatic
 - Efficiently implement more settings and display them
-
