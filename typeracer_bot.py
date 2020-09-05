@@ -94,4 +94,4 @@ def main(link="https://play.typeracer.com", default=0.1, driver="chrome"):
 
 
 if __name__ == "__main__":
-    main(driver="firefox")
+    main()
