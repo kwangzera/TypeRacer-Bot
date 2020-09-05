@@ -19,6 +19,6 @@ If using `keysend_type()`, the delay must be entered as soon as the races starts
 In addition, the `link` and `delay` variables can be modified to open an invite link and change the default delay time.
 
 ### Todo
-- Add drivers for other web browsers
 - Perhaps make the bot more automatic
-- Add more settings and display them
+- Efficiently implement more settings and display them
+
