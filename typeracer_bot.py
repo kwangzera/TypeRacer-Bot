@@ -45,11 +45,11 @@ def send_text(driver, text, delay):
     """Send `text` to text input box first working driver in `drivers` dict"""
 
     try:
-        # Click the inputbox when it can be clicked
+        # Click the input box when it can be clicked
         wait = WebDriverWait(driver, 15)
         elem = wait.until(EC.element_to_be_clickable((By.CLASS_NAME, "txtInput")))
     except TimeoutException:
-        print("! inputbox not found within 15s")
+        print("! input box not found within 15s")
     else:
         for i in text:
             time.sleep(delay)
