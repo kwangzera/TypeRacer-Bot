@@ -16,7 +16,7 @@ If using `send_text()`, the delay can be entered before the race starts because 
 
 If using `press_text()`, the delay must be entered as soon as the races start, and the input box must be manually selected before the program starts to simulate keypresses.
 
-In `main()`, `link`, `delay`, and `driver` can be modified to open an invite link, set the default delay time, and change the driver to either `chrome`, `firefox`, or `edge`.
+In `main()`, `link` can be modified to open an invite link, `delay` can be modified to set a new default delay time, and `driver` can be modified to change the driver to either `chrome`, `firefox`, or `edge`.
 
 ### Todo
 - Perhaps make the bot more automatic
