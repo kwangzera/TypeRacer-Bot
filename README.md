@@ -21,3 +21,4 @@ In `main()`, `link` can be modified to open an invite link, `delay` can be modif
 ### Todo
 - Perhaps make the bot more automatic
 - Efficiently implement more settings and display them
+- Display webdriver versions on README
