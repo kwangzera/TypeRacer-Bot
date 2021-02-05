@@ -62,8 +62,8 @@ def get_driver(pref):
     # dict[name: lambda -> WebDriver]
     drivers = dict(
         chrome=lambda: Chrome(executable_path="drivers/chromedriver"),
-        firefox=lambda: Firefox(executable_path="drivers/firefoxdriver"),
-        edge=lambda: Edge(executable_path="drivers/edgedriver"),
+        firefox=lambda: Firefox(executable_path="drivers/geckodriver"),
+        edge=lambda: Edge(executable_path="drivers/msedgedriver"),
     )
 
     if pref in drivers:
