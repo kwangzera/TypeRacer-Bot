@@ -4,7 +4,7 @@ from contextlib import suppress
 from bs4 import BeautifulSoup
 from pynput.keyboard import Controller
 
-from selenium.common.exceptions import TimeoutException, WebDriverException
+from selenium.common.exceptions import TimeoutException, WebDriverException, UnexpectedAlertPresentException
 from selenium.webdriver import Chrome, Firefox, Edge
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
@@ -51,10 +51,12 @@ def send_text(driver, text, delay):
     except TimeoutException:
         print("! input box not found within 15s")
     else:
-        for i in text:
-            time.sleep(delay)
-            elem.send_keys(i)
-
+        try:
+            for i in text:
+                time.sleep(delay)
+                elem.send_keys(i)
+        except UnexpectedAlertPresentException:
+            pass
 
 def get_driver(pref):
     """If pref in `drivers` dict, return respective driver"""
