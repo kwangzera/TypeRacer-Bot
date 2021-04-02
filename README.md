@@ -1,8 +1,8 @@
 # TypeRacer-Bot
-Python program that allows the use of both sending keys and simulating keypresses to cheat in TypeRacer. Be aware that the effectiveness of the program will depend on latency.  
+Python program that allows the use of both sending keys and simulating keypresses to cheat in TypeRacer. Be aware that the effectiveness of the program will depend on latency.
 
-![race](https://github.com/Togohogo1/TypeRacer-Bot/blob/master/screenshots/race.png)  
-![interactive](https://github.com/Togohogo1/TypeRacer-Bot/blob/master/screenshots/interactive.png)  
+![race](https://github.com/Togohogo1/TypeRacer-Bot/blob/master/screenshots/race.png)\
+![interactive](https://github.com/Togohogo1/TypeRacer-Bot/blob/master/screenshots/interactive.png)
 
 ### Setup
 A webdriver is necessary for the program to run. If the ones located in `TypeRacer-Bot/drivers` do not work it probably means that either the browser version is not compatible with the webdriver version and/or the browser for the webdriver isn't installed. Driver downloads are available for [Chrome](https://chromedriver.chromium.org/downloads), [Firefox](https://github.com/mozilla/geckodriver/releases), [Edge](https://developer.microsoft.com/en-us/microsoft-edge/tools/webdriver/), and more.
