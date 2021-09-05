@@ -5,7 +5,7 @@ Python program that allows the use of both sending keys and simulating keypresse
 ![interactive](https://github.com/Togohogo1/TypeRacer-Bot/blob/master/screenshots/interactive.png)
 
 ### Setup
-A webdriver is necessary for the program to run. Driver downloads are available for [Chrome](https://chromedriver.chromium.org/downloads), [Firefox](https://github.com/mozilla/geckodriver/releases), [Edge](https://developer.microsoft.com/en-us/microsoft-edge/tools/webdriver/), and more. Installed driver `.exe`s should be placed in a new folder called `TypeRacer-Bot/drivers`. If the webdrivers fail to work, it probably means that either the browser version is not compatible with the webdriver version and/or the browser for the webdriver isn't installed.
+A webdriver (downloads are available for [Chrome](https://chromedriver.chromium.org/downloads), [Firefox](https://github.com/mozilla/geckodriver/releases), [Edge](https://developer.microsoft.com/en-us/microsoft-edge/tools/webdriver/), and more) is necessary for the program to run. Installed driver `.exe` files should be placed in a new folder called `TypeRacer-Bot/drivers`. If the webdrivers fail to work, it probably means that either the browser version is not compatible with the webdriver version and/or the browser for the webdriver isn't installed.
 
 To start the program, double click `run.bat` once downloaded. All necessary libraries will be installed in a virtual environment.
 
