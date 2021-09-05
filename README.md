@@ -10,7 +10,7 @@ A webdriver is necessary for the program to run. If the ones located in `TypeRac
 To start the program, double click `run.bat` once downloaded. All necessary libraries will be installed in a virtual environment.
 
 ### Racing
-Anytime a race starts, the user is asked to input a delay time. After entering the delay, one of the two methods of typing, `send_text()` or `press_text()` will be used.
+Anytime a race starts, the user is asked to input a delay time. After entering the delay, one of the two methods of typing, `send_text()` or `press_text()`, will be used.
 
 If using `send_text()`, the delay can be entered before the race starts because the program will automatically send the text to the input box when it is detected. This method is the one currently used in the program.
 
