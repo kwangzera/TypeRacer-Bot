@@ -5,6 +5,7 @@ from bs4 import BeautifulSoup
 from pynput.keyboard import Controller
 
 from selenium.common.exceptions import TimeoutException, WebDriverException, UnexpectedAlertPresentException
+from selenium import webdriver
 from selenium.webdriver import Chrome, Firefox, Edge
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
@@ -61,9 +62,14 @@ def send_text(driver, text, delay):
 def get_driver(pref):
     """If pref in `drivers` dict, return respective driver"""
 
+    # Suppress error/warning/log messages in command prompt for Chrome
+    if pref == "chrome":
+        options = webdriver.ChromeOptions()
+        options.add_experimental_option('excludeSwitches', ['enable-logging'])
+
     # dict[name: lambda -> WebDriver]
     drivers = dict(
-        chrome=lambda: Chrome(executable_path="drivers/chromedriver"),
+        chrome=lambda: Chrome(executable_path="drivers/chromedriver", options=options),
         firefox=lambda: Firefox(executable_path="drivers/geckodriver"),
         edge=lambda: Edge(executable_path="drivers/msedgedriver"),
     )
