@@ -12,9 +12,9 @@ To start the program, double click `run.bat` once downloaded. All necessary libr
 ### Racing
 Anytime a race starts, the user is asked to input a delay time. After entering the delay, one of the two methods of typing, `send_text()` or `press_text()`, will be used.
 
-If using `send_text()`, the delay can be entered before the race starts because the program will automatically send the text to the input box when it is detected. This method is the one currently used in the program.
+If using `send_text(driver, text, delay)`, the delay can be entered before the race starts because the program will automatically send the text to the input box when it is detected. This method is the one currently used in the program.
 
-If using `press_text()`, the delay must be entered as soon as the races start, and the input box must be manually selected before the program starts to simulate keypresses.
+If using `press_text(keyboard, text, delay)`, the delay must be entered as soon as the races start, and the input box must be manually selected before the program starts to simulate keypresses.
 
 In `main()`, `link` can be modified to open an invite link, `delay` can be modified to set a new default delay time, and `driver` can be modified to change the driver to either `"chrome"`, `"firefox"`, or `"edge"`.
 
